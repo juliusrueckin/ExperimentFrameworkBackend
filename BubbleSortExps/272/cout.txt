@@ -1,0 +1,66 @@
+INFO - Bubble Sort - Running command 'bubbleSort'
+INFO - Bubble Sort - Started run with ID "272"
+Experiment: Bubble Sort Experiment
+
+nothing here
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+
+
+Bubble Sort Experiment is running for 10 seconds!
+
+
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+
+
+Bubble Sort Experiment is running for 20 seconds!
+
+
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+
+
+Bubble Sort Experiment is running for 30 seconds!
+
+
+nothing here
+nothing here
+nothing here
+nothing here
+b'yes\n'
+nothing here
+nothing here
+nothing here
+nothing here
+nothing here

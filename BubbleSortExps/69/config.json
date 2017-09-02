@@ -1,0 +1,25 @@
+{
+  "bubblesort_input_dataset": {
+    "filename": "bubblesort_input_dataset.csv",
+    "normalize": false
+  },
+  "params": [
+    {
+      "name": "unsortedArray",
+      "value": [
+        90,
+        60,
+        35,
+        16,
+        96,
+        30,
+        39,
+        32,
+        22,
+        19
+      ]
+    }
+  ],
+  "seed": 580895516,
+  "title": "Bubble Sort"
+}

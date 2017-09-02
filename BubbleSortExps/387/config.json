@@ -1,0 +1,24 @@
+{
+  "bubblesort_input_dataset": {
+    "filename": "bubblesort_input_dataset.csv",
+    "normalize": false
+  },
+  "csvFields": [
+    "[unsortedArray",
+    " chaosMeasure",
+    " sortedArray]"
+  ],
+  "csvFilename": "testOutput",
+  "params": [
+    {
+      "name": "unsortedArray",
+      "value": "[10,9,8]"
+    },
+    {
+      "name": "chaosMeasure",
+      "value": "reverse"
+    }
+  ],
+  "seed": 236784067,
+  "title": "Bubble"
+}

@@ -1,0 +1,12 @@
+{
+	"env": "",
+	"path": "/home/julius/Dokumente/Uni/HPI/Jobs/GFZ/SacredTest",
+	"cmd": "python bubble.py",
+	"title": "Bubble Sort Test Experiment",
+	"params": [
+		{"name": "array_file_path", "value" : "bubblesort_input_dataset.csv"},
+		{"name": "chaosMeasure", "value" : "reversed"}
+	],
+	"csvFields": ["unsortedArray", "chaosMeasure", "sortedArray"],
+	"csvFilename": "bubbleSortExp"
+}

@@ -1,0 +1,6 @@
+INFO - Bubble Sort - Running command 'bubbleSort'
+INFO - Bubble Sort - Started run with ID "72"
+Experiment: Bubble Sort
+
+[[3, 10, 11, 42, 49, 53, 70, 71, 96, 99], [3, 10, 11, 42, 49, 53, 70, 71, 96, 99]]
+['unsortedArray', 'chaosMeasure', 'sortedArray']

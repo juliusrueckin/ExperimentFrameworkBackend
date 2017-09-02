@@ -1,0 +1,5 @@
+{
+	"defaultTimeout": 60,
+	"outputPattern": "Algorithm still working fine",
+	"maxTimeSinceLastStatusMsg": 20
+}

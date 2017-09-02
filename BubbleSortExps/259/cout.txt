@@ -1,0 +1,24 @@
+INFO - Bubble Sort - Running command 'bubbleSort'
+INFO - Bubble Sort - Started run with ID "259"
+Status message dependent timeout bound exceeded! Status message dependent timeout after 100sec., since last status message
+Experiment: Bubble Sort Experiment
+
+
+
+Bubble Sort Experiment is running for 10 seconds!
+
+
+Status message dependent timeout bound exceeded! Status message dependent timeout after 100sec., since last status message
+
+
+Bubble Sort Experiment is running for 20 seconds!
+
+
+Status message dependent timeout bound exceeded! Status message dependent timeout after 100sec., since last status message
+Algorithm still working fine
+
+
+Bubble Sort Experiment is running for 30 seconds!
+
+
+Status message dependent timeout bound exceeded! Status message dependent timeout after 100sec., since last status message

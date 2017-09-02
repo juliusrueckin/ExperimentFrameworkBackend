@@ -1,0 +1,38 @@
+{
+  "bubblesort_input_dataset": {
+    "filename": "bubblesort_input_dataset.csv",
+    "normalize": false
+  },
+  "cmd": "python bubble.py",
+  "csvFields": [
+    "unsortedArray",
+    "chaosMeasure",
+    "sortedArray"
+  ],
+  "csvFilename": "bubbleSortExp",
+  "env": "",
+  "params": [
+    {
+      "name": "unsortedArray",
+      "value": [
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "chaosMeasure",
+      "value": "reversed"
+    }
+  ],
+  "path": "/home/julius/Dokumente/Uni/HPI/Jobs/GFZ/Sacred Test",
+  "seed": 895184285,
+  "title": "Bubble Sort Test Experiment"
+}

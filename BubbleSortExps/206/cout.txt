@@ -1,0 +1,13 @@
+INFO - Bubble Sort - Running command 'bubbleSort'
+INFO - Bubble Sort - Started run with ID "206"
+
+
+Bubble Sort Experimentis running for 18 seconds!
+Default timeout bound exceeded! Default timeout after 15sec.
+Experiment: Bubble Sort Experiment
+
+
+
+Bubble Sort Experimentis running for 28 seconds!
+Default timeout bound exceeded! Default timeout after 15sec.
+INFO - Bubble Sort - Completed after 0:00:10

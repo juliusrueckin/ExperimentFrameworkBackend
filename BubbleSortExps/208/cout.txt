@@ -1,0 +1,10 @@
+INFO - Bubble Sort - Running command 'bubbleSort'
+INFO - Bubble Sort - Started run with ID "208"
+Experiment: Bubble Sort Experiment
+
+
+
+Bubble Sort Experimentis running for 10 seconds!
+
+
+INFO - Bubble Sort - Completed after 0:00:11

@@ -1,0 +1,12 @@
+INFO - Bubble Sort - Running command 'bubbleSort'
+INFO - Bubble Sort - Started run with ID "403"
+
+Experiment: Bubble Sort Experiment
+
+ERROR - telegram.ext.dispatcher - An uncaught error was raised while processing the update
+Traceback (most recent call last):
+  File "/home/julius/anaconda3/lib/python3.5/site-packages/telegram/ext/dispatcher.py", line 265, in process_update
+    handler.handle_update(update, self)
+  File "/home/julius/anaconda3/lib/python3.5/site-packages/telegram/ext/commandhandler.py", line 136, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: getUtilization() takes 2 positional arguments but 3 were given

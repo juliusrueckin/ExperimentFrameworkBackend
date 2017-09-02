@@ -1,0 +1,25 @@
+{
+  "csvFormat": [
+    "unsortedArray",
+    "chaosMeasure",
+    "sortedArray"
+  ],
+  "params": [
+    {
+      "name": "unsortedArray",
+      "value": [
+        5,
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "chaosMeasure",
+      "value": "reversed"
+    }
+  ],
+  "seed": 83402772,
+  "title": "Bubble Sort"
+}
