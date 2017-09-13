@@ -10,17 +10,21 @@ class TimeoutObserver(RunObserver):
     def from_config(cls, filename, expInstance):
         d = load_config_file(filename)
         obs = None
-        if 'defaultTimeout' in d and 'maxTimeSinceLastStatusMsg' in d and 'outputPattern' in d and 'errorPattern' in d and 'minImprovementSinceLastIteration' in d:
-            obs = cls(d['defaultTimeout'], d['outputPattern'], d['maxTimeSinceLastStatusMsg'], expInstance, d['errorPattern'], d['minImprovementSinceLastIteration'])
+        if 'defaultTimeout' in d and 'maxTimeSinceLastStatusMsg' in d and 'outputPattern' in d and 'errorPattern' in d and 'minLossFunctionImprovementSinceLastIteration' in d and 'accuracyPattern' in d and 'minAccuracyFunctionImprovementSinceLastIteration' in d:
+            obs = cls(d['defaultTimeout'], d['outputPattern'], d['maxTimeSinceLastStatusMsg'], expInstance, d['errorPattern'], d['minLossFunctionImprovementSinceLastIteration'], d['accuracyPattern'], d['minAccuracyFunctionImprovementSinceLastIteration'])
         else:
             raise ValueError("Timeout configuration file must contain "
                              "an entry for 'defaultTimeout', 'outputPattern' and 'maxTimeSinceLastStatusMsg'!")
 
         return obs
 
-    def __init__(self, defaultTimeout, outputPattern, maxTimeSinceLastStatusMsg, expInstance, errorPattern, minImprovementSinceLastIteration):
+    def __init__(self, defaultTimeout, outputPattern, maxTimeSinceLastStatusMsg, expInstance, errorPattern, minLossFunctionImprovementSinceLastIteration, accuracyPattern, minAccuracyFunctionImprovementSinceLastIteration):
         self.errorPattern = errorPattern
-        self.minImprovementSinceLastIteration = minImprovementSinceLastIteration
+        self.minLossFunctionImprovementSinceLastIteration = minLossFunctionImprovementSinceLastIteration
+        
+        self.accuracyPattern = accuracyPattern
+        self.minAccuracyFunctionImprovementSinceLastIteration = minAccuracyFunctionImprovementSinceLastIteration
+
         self.defaultTimeout = defaultTimeout
         self.outputPattern = outputPattern
         self.maxTimeSinceLastStatusMsg = maxTimeSinceLastStatusMsg
@@ -33,8 +37,12 @@ class TimeoutObserver(RunObserver):
         self.statusMsgCount = 0
         self.run = None
         self.message = ""
+
         self.errorMsgCount = 0
         self.currentErrorValue = -1
+
+        self.accuracyMsgCount = 0
+        self.currentAccuracyValue = -1
 
     def defaultTimeoutBoundExceeded(self):
         return self.totalRunTime > self.defaultTimeout
@@ -67,8 +75,27 @@ class TimeoutObserver(RunObserver):
 
         return False
 
-    def improvedEnough(self, lastErrorValue):
-        if lastErrorValue - self.currentErrorValue > self.minImprovementSinceLastIteration:
+    def newRequiredAccuracyMsgOccurred(self):
+        with open(self.run['config']['title'] + 'StatusMessages.txt') as statusMsgFile:
+            for rowCount, accuracyMsg in enumerate(statusMsgFile):
+                if rowCount <= self.accuracyMsgCount:
+                    continue
+
+                if self.accuracyPattern in accuracyMsg.rstrip():
+                    self.accuracyMsgCount = rowCount
+                    self.currentAccuracyValue = int(accuracyMsg.rstrip().split(self.accuracyPattern)[-1])
+                    return True
+
+        return False
+
+    def errorImprovedEnough(self, lastErrorValue):
+        if lastErrorValue - self.currentErrorValue >= self.minLossFunctionImprovementSinceLastIteration:
+            return True
+
+        return False
+
+    def accuracyImprovedEnough(self, lastAccuracyValue):
+        if self.currentAccuracyValue - lastAccuracyValue >= self.minAccuracyFunctionImprovementSinceLastIteration:
             return True
 
         return False
@@ -118,8 +145,20 @@ class TimeoutObserver(RunObserver):
         lastErrorValue = self.currentErrorValue
          
         if self.newRequiredErrorMsgOccurred():
-            if self.improvedEnough(lastErrorValue) is False:
-                print("Loss function did not improve by " + str(self.minImprovementSinceLastIteration) + "! Algorithm terminated!")
+            if self.errorImprovedEnough(lastErrorValue) is False:
+                print("Loss function did not improve by " + str(self.minLossFunctionImprovementSinceLastIteration) + "! Algorithm terminated!")
+                self.expInstance.forceKill() 
+
+    def handleAccuracyPatternBasedTimeout(self):
+        if self.currentAccuracyValue == -1:
+            self.newRequiredAccuracyMsgOccurred()
+            return
+        
+        lastAccuracyValue = self.currentAccuracyValue
+         
+        if self.newRequiredAccuracyMsgOccurred():
+            if self.accuracyImprovedEnough(lastAccuracyValue) is False:
+                print("Accuracy function did not improve by " + str(self.minAccuracyFunctionImprovementSinceLastIteration) + "! Algorithm terminated!")
                 self.expInstance.forceKill() 
 
     def get_heartbeat_text(self):
@@ -139,7 +178,9 @@ class TimeoutObserver(RunObserver):
     def heartbeat_event(self, info, captured_out, beat_time, result):
         self.handleDefaultTimeout(beat_time)
         self.handleOutputPatternBasedTimeout(beat_time)
+
         self.handleErrorPatternBasedTimeout()
+        self.handleAccuracyPatternBasedTimeout()
 
 
     def completed_event(self, stop_time, result):

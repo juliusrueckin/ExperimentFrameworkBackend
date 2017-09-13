@@ -2,17 +2,30 @@ import random
 
 def bubble(inputArray):
 	x = 1
+
 	error = 100
-	errorImprovement = 6
+	errorImprovement = 7
+	errorFunctionTest = False
+
+	accuracy = 0
+	accuracyImprovement = 6
+	accuracyFunctionTest = True
 
 	for i in range(0, len(inputArray)):
 		for j in range(0, len(inputArray)-1):
 			if i * len(inputArray) >= ((len(inputArray)**2) * (x/5)):
 				print("Algorithm still working fine")
 				x += 1
-				error = error - errorImprovement
-				errorImprovement = errorImprovement - 1
-				print("Loss function:" + str(error))
+
+				if errorFunctionTest:
+					error = error - errorImprovement
+					errorImprovement = errorImprovement - 1
+					print("Loss function: " + str(error))
+
+				if accuracyFunctionTest:
+					accuracy = accuracy + accuracyImprovement
+					accuracyImprovement = accuracyImprovement - 1
+					print("Accuracy function: " + str(accuracy))
 
 			if inputArray[j] > inputArray[j+1]:
 				tmp = inputArray[j+1]
