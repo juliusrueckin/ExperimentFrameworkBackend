@@ -46,13 +46,13 @@ class BubbleSortExpSeries():
 
 	def startExperimentSeries(self):
 		for i in range(1, self.repetitions + 1):
-				print(str(i) + ". Durchlauf")
-				setRepetitionNumber(i)
-				r = ex.run(named_configs=[self.confSrc])
-				#print("\nÁllgemeiner Versuchsaufbau\n")
-				#print(r.experiment_info)
-				#print(r.host_info)
-				print("---------------------------------------------------")
+			print(str(i) + ". Durchlauf")
+			setRepetitionNumber(i)
+			r = ex.run(named_configs=[self.confSrc])
+			#print("\nÁllgemeiner Versuchsaufbau\n")
+			#print(r.experiment_info)
+			#print(r.host_info)
+			print("---------------------------------------------------")
 
 
 	def __init__(self, repetitions, confSrc='testConfig/bubbleSortConfigFile.json', slack_obs_file='testConfig/slack.json', telegram_obs_file='testConfig/telegram.json', mail_obs_file='testConfig/mail.json', timeout_obs_file='testConfig/timeout.json'):

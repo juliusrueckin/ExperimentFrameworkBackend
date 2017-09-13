@@ -29,7 +29,7 @@ def do_createFiles():
 
     conf_dir = basicConfJSON['title'] + 'Configs'
     config_path = os.path.join(base_path, conf_dir)
-
+    
     basicConfPath = config_path + '/basicConfFile.json'
 
     timeoutConf = request.params.get('timeoutConfObj')

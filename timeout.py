@@ -2,6 +2,7 @@ from sacred.observers import RunObserver
 from sacred.config.config_files import load_config_file
 from datetime import timedelta
 import sys
+import re
 
 class TimeoutObserver(RunObserver):
 
@@ -9,15 +10,17 @@ class TimeoutObserver(RunObserver):
     def from_config(cls, filename, expInstance):
         d = load_config_file(filename)
         obs = None
-        if 'defaultTimeout' in d and 'maxTimeSinceLastStatusMsg' in d and 'outputPattern' in d:
-            obs = cls(d['defaultTimeout'], d['outputPattern'], d['maxTimeSinceLastStatusMsg'], expInstance)
+        if 'defaultTimeout' in d and 'maxTimeSinceLastStatusMsg' in d and 'outputPattern' in d and 'errorPattern' in d and 'minImprovementSinceLastIteration' in d:
+            obs = cls(d['defaultTimeout'], d['outputPattern'], d['maxTimeSinceLastStatusMsg'], expInstance, d['errorPattern'], d['minImprovementSinceLastIteration'])
         else:
             raise ValueError("Timeout configuration file must contain "
                              "an entry for 'defaultTimeout', 'outputPattern' and 'maxTimeSinceLastStatusMsg'!")
 
         return obs
 
-    def __init__(self, defaultTimeout, outputPattern, maxTimeSinceLastStatusMsg, expInstance):
+    def __init__(self, defaultTimeout, outputPattern, maxTimeSinceLastStatusMsg, expInstance, errorPattern, minImprovementSinceLastIteration):
+        self.errorPattern = errorPattern
+        self.minImprovementSinceLastIteration = minImprovementSinceLastIteration
         self.defaultTimeout = defaultTimeout
         self.outputPattern = outputPattern
         self.maxTimeSinceLastStatusMsg = maxTimeSinceLastStatusMsg
@@ -30,6 +33,8 @@ class TimeoutObserver(RunObserver):
         self.statusMsgCount = 0
         self.run = None
         self.message = ""
+        self.errorMsgCount = 0
+        self.currentErrorValue = -1
 
     def defaultTimeoutBoundExceeded(self):
         return self.totalRunTime > self.defaultTimeout
@@ -46,6 +51,25 @@ class TimeoutObserver(RunObserver):
                 if linesStatusMsg.rstrip() == self.outputPattern:
                     self.statusMsgCount = len(statusMsgFile.readlines())
                     return True
+
+        return False
+
+    def newRequiredErrorMsgOccurred(self):
+        with open(self.run['config']['title'] + 'StatusMessages.txt') as statusMsgFile:
+            for rowCount, errorMsg in enumerate(statusMsgFile):
+                if rowCount <= self.errorMsgCount:
+                    continue
+
+                if self.errorPattern in errorMsg.rstrip():
+                    self.errorMsgCount = rowCount
+                    self.currentErrorValue = int(errorMsg.rstrip().split(self.errorPattern)[-1])
+                    return True
+
+        return False
+
+    def improvedEnough(self, lastErrorValue):
+        if lastErrorValue - self.currentErrorValue > self.minImprovementSinceLastIteration:
+            return True
 
         return False
 
@@ -86,6 +110,18 @@ class TimeoutObserver(RunObserver):
             self.timeSinceLastStatusMsg = 0
             self.lastMsgDependetHeartbeat = -1
 
+    def handleErrorPatternBasedTimeout(self):
+        if self.currentErrorValue == -1:
+            self.newRequiredErrorMsgOccurred()
+            return
+        
+        lastErrorValue = self.currentErrorValue
+         
+        if self.newRequiredErrorMsgOccurred():
+            if self.improvedEnough(lastErrorValue) is False:
+                print("Loss function did not improve by " + str(self.minImprovementSinceLastIteration) + "! Algorithm terminated!")
+                self.expInstance.forceKill() 
+
     def get_heartbeat_text(self):
         return "\n\n" + self.run['config']['title'] + " is running for " + str(self.totalRunTime) + " seconds!\n\n"
 
@@ -103,6 +139,7 @@ class TimeoutObserver(RunObserver):
     def heartbeat_event(self, info, captured_out, beat_time, result):
         self.handleDefaultTimeout(beat_time)
         self.handleOutputPatternBasedTimeout(beat_time)
+        self.handleErrorPatternBasedTimeout()
 
 
     def completed_event(self, stop_time, result):
