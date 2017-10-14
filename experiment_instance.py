@@ -40,7 +40,7 @@ def doThingsAfterTermination(statusOutputFilePath, csvFields, csvFilename):
 #runs a single experiment instance in a subprocess
 @ex.main
 @ex.capture
-def runExperimentInstance(params, csvFields, title, csvFilename, cmd, env, path):
+def runExperimentInstance(params, csvFields, title, csvFilename, cmd, env, path, server, user, password, webhook_url, icon, bot_name, token, chat_id, defaultTimeout, outputPattern, maxTimeSinceLastStatusMsg, errorPattern, minLossFunctionImprovementSinceLastIteration, accuracyPattern, minAccuracyFunctionImprovementSinceLastIteration):
 	print("\nExperiment: " + title + "\n")
 
 	#clear existing status messages ouput file
@@ -51,7 +51,7 @@ def runExperimentInstance(params, csvFields, title, csvFilename, cmd, env, path)
 	cmd_par = get_execute_command(path, env, cmd) + " " + parse_params(params)
 	
 	#open subprocess with built command and status messages output file as stdout
-	proc = subprocess.Popen(cmd_par,stdout=open(statusOutputFilePath, 'w+'), stderr = open(title + 'StatusMessages.txt', 'w+'), shell=True, preexec_fn=os.setsid)
+	proc = subprocess.Popen(cmd_par,stdout=subprocess.PIPE, stderr = subprocess.PIPE, shell=True, preexec_fn=os.setsid)
 	
 	proc.wait()
 	
