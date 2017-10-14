@@ -1,6 +1,0 @@
-INFO - Bubble Sort - Running command 'bubbleSort'
-INFO - Bubble Sort - Started run with ID "193"
-Bubble Sort Experimentis running for 0 seconds!
-Experiment: Bubble Sort Experiment
-
-Bubble Sort Experimentis running for 10 seconds!

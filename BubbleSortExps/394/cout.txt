@@ -1,8 +1,0 @@
-INFO - Bubble Sort - Running command 'bubbleSort'
-INFO - Bubble Sort - Started run with ID "394"
-
-Experiment: dskbl
-
-/home/julius/Dokumente/Uni/HPI/Jobs/GFZ/Sacred Test/test_experiment.py:70: ResourceWarning: unclosed file <_io.TextIOWrapper name='dskblStatusMessages.txt' mode='w+' encoding='UTF-8'>
-  sys.stdout = oldStdout
-INFO - Bubble Sort - Completed after 0:00:00

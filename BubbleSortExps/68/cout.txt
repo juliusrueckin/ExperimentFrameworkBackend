@@ -1,9 +1,0 @@
-INFO - Bubble Sort - Running command 'bubbleSort'
-INFO - Bubble Sort - Started run with ID "68"
-Experiment: Bubble Sort
-
-[10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.0]
-[10.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.0]
-[[5, 4, 3, 2, 1], 'reversed', [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]]
-['unsortedArray', 'chaosMeasure', 'sortedArray']
-INFO - Bubble Sort - Completed after 0:00:00

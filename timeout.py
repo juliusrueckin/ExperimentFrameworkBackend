@@ -131,7 +131,7 @@ class TimeoutObserver(RunObserver):
 
         if self.statusMsgDependentTimeoutBoundExceeded():
             if self.newRequiredStatsMsgOccurred() is False:
-                print("Status message dependent timeout bound exceeded! Status message dependent timeout after " + str(self.maxTimeSinceLastStatusMsg) + "sec., since last status message")
+                print("Status message dependent timeout bound exceeded! Status message dependent timeout after " + str(self.maxTimeSinceLastStatusMsg) + "sec. since last status message")
                 self.expInstance.forceKill()
 
             self.timeSinceLastStatusMsg = 0

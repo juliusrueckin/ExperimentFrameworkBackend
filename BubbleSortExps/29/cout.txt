@@ -1,7 +1,0 @@
-INFO - test_experiment - Running command 'bubbleSort'
-INFO - test_experiment - Started run with ID "29"
-Experiment: Bubble Sort
-
-[[1, 2, 3, 4, 5], 'reversed', [1, 2, 3, 4, 5]]
-['unsortedArray', 'chaosMeasure', 'sortedArray']
-INFO - test_experiment - Completed after 0:00:00

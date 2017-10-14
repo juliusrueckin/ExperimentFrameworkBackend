@@ -1,6 +1,0 @@
-INFO - Bubble Sort - Running command 'bubbleSort'
-INFO - Bubble Sort - Started run with ID "133"
-Experiment: Bubble Sort Test Experiment
-
-OHOHOHOHOHOHO REPETITION: 2
-[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'reversed', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]

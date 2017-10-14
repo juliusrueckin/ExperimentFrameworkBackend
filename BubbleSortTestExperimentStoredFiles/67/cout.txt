@@ -1,0 +1,27 @@
+INFO - Experiment Framework - Running command 'runExperimentInstance'
+INFO - Experiment Framework - Started run with ID "67"
+
+Experiment: Bubble Sort Test Experiment
+
+2
+
+
+Bubble Sort Test Experiment is running for 3 seconds!
+
+
+
+
+Bubble Sort Test Experiment is running for 6 seconds!
+
+
+
+
+Bubble Sort Test Experiment is running for 9 seconds!
+
+
+
+
+Bubble Sort Test Experiment is running for 12 seconds!
+
+
+INFO - Experiment Framework - Completed after 0:00:14

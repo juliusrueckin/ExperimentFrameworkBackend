@@ -1,0 +1,9 @@
+{
+	"defaultTimeout": 1000,
+	"outputPattern": "Algorithm still working fine",
+	"maxTimeSinceLastStatusMsg": 200,
+	"errorPattern": "Loss function: ",
+	"minLossFunctionImprovementSinceLastIteration": 10,
+	"accuracyPattern": "Accuracy function: ",
+	"minAccuracyFunctionImprovementSinceLastIteration": 10
+}
