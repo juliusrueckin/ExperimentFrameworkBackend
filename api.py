@@ -30,8 +30,20 @@ def start_experiment():
 		# if name already exists, return 409 Conflict
 		response.status = 409
 		return
-	
-	ExperimentSeries(data['repetitions'], data['basicConfigFilePath'])
+
+	if 'slackConfigFilePath' not in data.keys():
+		data['slackConfigFilePath'] = "defaultConfig/slack.json"
+
+	if 'telegramConfigFilePath' not in data.keys():
+		data['telegramConfigFilePath'] = "defaultConfig/telegram.json"
+
+	if 'mailConfigFilePath' not in data.keys():
+		data['mailConfigFilePath'] = "defaultConfig/mail.json"
+
+	if 'timeoutConfigFilePath' not in data.keys():
+		data['timeoutConfigFilePath'] = "defaultConfig/timeout.json"
+
+	ExperimentSeries(data['repetitions'], confSrc=data['basicConfigFilePath'], slack_obs_file=data['slackConfigFilePath'], telegram_obs_file=data['telegramConfigFilePath'], mail_obs_file=data['mailConfigFilePath'], timeout_obs_file=data['timeoutConfigFilePath'])
     
 	# return 200 Success
 	response.headers['Content-Type'] = 'application/json'
